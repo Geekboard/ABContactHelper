@@ -45,6 +45,7 @@
 
 @implementation ABContact
 @synthesize record;
+@synthesize chosung = mChosung;
 
 // Thanks to Quentarez, Ciaran
 - (id) initWithRecord: (ABRecordRef) aRecord
@@ -79,6 +80,7 @@
 - (void) dealloc
 {
 	if (record) CFRelease(record);
+    self.chosung = nil;
 	[super dealloc];
 }
 
@@ -328,6 +330,35 @@
 {
 	NSString *string = (NSString *)ABRecordCopyCompositeName(record);
 	return [string autorelease];
+}
+
+- (NSString *)chosung {
+    
+    if(mChosung == nil) {
+        NSString *contactName = [self contactName];
+        const NSArray *chosung = [NSArray arrayWithObjects:@"ㄱ",@"ㄲ",@"ㄴ",@"ㄷ",@"ㄸ",@"ㄹ",@"ㅁ",@"ㅂ",@"ㅃ",@"ㅅ",@"ㅆ",@"ㅇ",@"ㅈ",@"ㅉ",@"ㅊ",@"ㅋ",@"ㅌ",@"ㅍ",@"ㅎ",nil];
+        
+        NSString *textResult = @"";
+        for (int i=0;i<[contactName length];i++) {
+            NSInteger code = [contactName characterAtIndex:i];
+            if (code >= 44032 && code <= 55203) {				
+                NSInteger uniCode = code - 44032;				
+                NSInteger chosungIndex = uniCode / 21 / 28;		
+                textResult = [textResult stringByAppendingFormat:[chosung objectAtIndex:chosungIndex]];
+            }  
+            else  {
+                textResult = [textResult stringByAppendingFormat:@"%C", code];
+            }
+        }
+        
+        if([contactName isEqualToString:textResult] == YES) {
+            mChosung = [[NSString alloc] initWithString:@""];
+        }
+        else {
+            mChosung = [[NSString alloc] initWithString:textResult];
+        }
+    }
+    return mChosung;
 }
 
 #pragma mark NUMBER

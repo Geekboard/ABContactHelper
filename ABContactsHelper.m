@@ -102,7 +102,8 @@
 {
 	NSPredicate *pred;
 	NSArray *contacts = [ABContactsHelper contacts];
-	pred = [NSPredicate predicateWithFormat:@"firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", fname, fname, fname, fname];
+    // Geekboard : 'chosung' key 도 검색하도록 수정
+	pred = [NSPredicate predicateWithFormat:@"chosung contains[cd] %@ OR firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@ ", fname, fname, fname, fname,fname];
 	return [contacts filteredArrayUsingPredicate:pred];
 }
 
@@ -110,9 +111,9 @@
 {
 	NSPredicate *pred;
 	NSArray *contacts = [ABContactsHelper contacts];
-	pred = [NSPredicate predicateWithFormat:@"firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", fname, fname, fname, fname];
+	pred = [NSPredicate predicateWithFormat:@"chosung contains[cd] %@ OR firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", fname, fname, fname, fname];
 	contacts = [contacts filteredArrayUsingPredicate:pred];
-	pred = [NSPredicate predicateWithFormat:@"firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", lname, lname, lname, lname];
+	pred = [NSPredicate predicateWithFormat:@"chosung contains[cd] %@ OR firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", lname, lname, lname, lname];
 	contacts = [contacts filteredArrayUsingPredicate:pred];
 	return contacts;
 }

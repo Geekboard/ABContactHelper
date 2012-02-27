@@ -59,6 +59,7 @@
 
 @property (nonatomic, readonly) NSString *contactName; // my friendly utility
 @property (nonatomic, readonly) NSString *compositeName; // via AB
+@property (nonatomic, retain) NSString *chosung; // Geekboard add
 
 #pragma mark NUMBER
 @property (nonatomic, assign) NSNumber *kind;
